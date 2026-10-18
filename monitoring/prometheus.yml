@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  # The app running inside docker-compose
+  - job_name: product-service-local
+    static_configs:
+      - targets: ["product-service:8080"]
+
+  # OPTIONAL: scrape the copy deployed on ECS (its /metrics is public on port 8080).
+  # Uncomment, put in the task's public IP, then: docker compose restart prometheus
+  # - job_name: product-service-ecs
+  #   static_configs:
+  #     - targets: ["<ECS_PUBLIC_IP>:8080"]

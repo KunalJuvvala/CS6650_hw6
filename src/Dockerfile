@@ -1,20 +1,21 @@
-FROM golang:1.24-alpine  AS build
-RUN apk add --no-cache git
+# ---- Build stage ----
+# If `go build` complains about the Go version, change this tag to match the `go` line in go.mod.
+FROM golang:1.27-alpine AS build
+WORKDIR /app
 
-WORKDIR /src
+# Download deps first so Docker caches them between code changes
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . .
-# disable cgo, target linux, static link
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-    go build -ldflags="-s -w" -o server .
+COPY *.go ./
+# Static binary so it runs on a tiny base image
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /product-service .
 
-FROM alpine:latest
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /app
-COPY --from=build /src/server .
-
+# ---- Run stage ----
+FROM alpine:3.20
+RUN adduser -D -u 10001 appuser
+COPY --from=build /product-service /usr/local/bin/product-service
+USER appuser
 EXPOSE 8080
-ENTRYPOINT ["./server"]
+ENV PORT=8080
+ENTRYPOINT ["/usr/local/bin/product-service"]

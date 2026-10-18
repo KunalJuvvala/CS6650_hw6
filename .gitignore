@@ -1,4 +1,39 @@
-**.tfvars
-**.tfstate
-**.tfstate.*
-**/.terraform/
+# --- Terraform ---
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+# NOTE: do commit .terraform.lock.hcl
+
+# --- Go ---
+/src/product-service
+*.exe
+*.test
+*.out
+
+# --- Secrets / env ---
+.env
+.env.*
+*.pem
+*.key
+credentials
+
+# --- Python / Locust ---
+__pycache__/
+.venv/
+venv/
+locust/results/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
