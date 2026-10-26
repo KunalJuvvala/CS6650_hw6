@@ -1,1 +1,1 @@
-[{"targets":["35.88.14.113:8080"],"labels":{"service":"CS6650L2"}},{"targets":["35.91.49.38:8080"],"labels":{"service":"CS6650L2"}},{"targets":["54.200.44.223:8080"],"labels":{"service":"CS6650L2"}}]
+[{"targets":["54.200.44.223:8080"],"labels":{"service":"CS6650L2"}},{"targets":["35.88.14.113:8080"],"labels":{"service":"CS6650L2"}}]
