@@ -37,3 +37,4 @@ locust/results/
 .DS_Store
 .idea/
 .vscode/
+!part*.tfvars

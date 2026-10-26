@@ -341,6 +341,7 @@ func main() {
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	r.GET("/products/:productId", h.getProduct)
 	r.POST("/products/:productId/details", h.addProductDetails)
+	registerSearchRoutes(r) // HW6: GET /products/search?q=... (defined in search.go)
 
 	port := os.Getenv("PORT")
 	if port == "" {

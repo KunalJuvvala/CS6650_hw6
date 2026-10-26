@@ -60,3 +60,9 @@ variable "memory" {
   default     = "512"
   description = "Memory (MiB)"
 }
+
+variable "target_group_arn" {
+  type        = string
+  default     = null
+  description = "ALB target group to register tasks in (null = no load balancer, Part II)"
+}

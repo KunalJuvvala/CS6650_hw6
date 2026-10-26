@@ -1,0 +1,11 @@
+# Scrapes EVERY running ECS task directly (not through the ALB).
+# The target list lives in targets/ecs-tasks.json and is kept fresh by update_targets.sh,
+# so new tasks from auto scaling appear automatically and stopped ones disappear.
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: ecs-tasks
+    file_sd_configs:
+      - files: ["/etc/prometheus/targets/*.json"]
+        refresh_interval: 10s
